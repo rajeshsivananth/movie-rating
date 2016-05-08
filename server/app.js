@@ -11,6 +11,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 var bodyParser = require('body-parser');
+var moviesController = require('./api/v1/movies/movies.controller');
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -20,6 +21,12 @@ mongoose.connection.on('error', function(err) {
 });
 mongoose.connection.once('connected', function() {
 	console.log("Connected to database as "+config.mongo.uri);
+  moviesController.getAllMovies().then(function(data){
+    if(!data || data.length === 0){
+      moviesController.saveMovies();
+    }
+  })
+  
 });
 
 // Populate DB with sample data
