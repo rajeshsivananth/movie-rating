@@ -7,6 +7,7 @@
     "composable-middleware": "^0.3.0",
     "compression": "~1.0.1",
     "cookie-parser": "~1.0.1",
+    "ejs": "^2.4.1",
     "express": "~4.9.0",
     "fs": "0.0.2",
     "jsonwebtoken": "^5.7.0",
