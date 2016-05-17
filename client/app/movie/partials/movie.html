@@ -1,1 +1,72 @@
-<h1>Review Page</h1>
+<style media="screen">
+.movie-window .modal-dialog {
+
+  margin-top: 5% !important;
+  border: solid 2px #157ED2;
+  border-radius: 0px !important;
+}
+.active-predicate{
+  color: #8A247C !important;
+}
+</style>
+<div class="" style="margin-top: 6%">
+  <div class="row" style="margin: 0px">
+    <div style="" class="col col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+      <div class="col col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+      </div>
+      <div  class="col col-xs-9 col-sm-9 col-md-9 col-lg-9" style="text-align: right">
+        Sort by Rating
+        <span style="cursor: pointer; font-size: 130%">
+          <i  ng-class="{'active-predicate': reverse_price==true}" class="fa fa-caret-down" ng-click="reverse_price=true"></i>
+          <i  ng-class="{'active-predicate': reverse_price==false}" class="fa fa-caret-up" ng-click="reverse_price=false"></i>
+        </span>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="row" style="margin: 0px">
+    <div class="col col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+      <div class="col col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <uib-tabset active="activePill" vertical="true" type="pills">
+          <uib-tab  ng-repeat="genre in genres" heading="{{genre}}" ng-click="fetch_movies(genre)"></uib-tab>
+        </uib-tabset>
+      </div>
+      <div class="col col-xs-9 col-sm-9 col-md-9 col-lg-9" style="border: solid 1px #157ED2" ng-init="reverse_price==true" >
+        <div class="" style="display: block;width: 100%;padding: 0.2%;text-align: center">
+          <div class="" style="display: inline-block; width: 30%;margin: 1.6%;border: solid 1px grey;" ng-init="reverse_price==true" ng-repeat="movie in movies | orderBy:'Rating':reverse_price">
+            <div class="" ng-click="movie_preview(movie)">
+              <img src="{{movie.PosterPath}}" style="width: 100%; max-width: 100%;cursor: pointer" alt="" />
+            </div>
+            <div class="" style="border-bottom: solid 1px grey;padding: 2%">
+              <uib-rating ng-model="movie.Rating" max="5" read-only="true" aria-labelledby="default-rating"></uib-rating>
+              <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" >{{percent}}%</span>
+            </div>
+            <div class="" style="background-color: #157ED2;color: white;font-size: 115%;padding:2%">
+              {{movie.OriginalTitle}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+<script type="text/ng-template" id="movie_preview.html">
+  <div class="row" style="margin:0px;text-align: center">
+  <div style="cursor: pointer;text-align: right;font-size: 150%">
+    <span ng-click="cancel()">X</span>
+
+  </div>
+  <div style="margin-bottom: 2%">
+    <iframe width="850" height="450" src="{{trailer.url}}" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  </div>
+</script>

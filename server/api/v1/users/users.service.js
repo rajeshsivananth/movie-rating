@@ -1,6 +1,7 @@
 var usersQuery = require('./users.query'), jwt = require('jsonwebtoken'), config = require('./../../../config/environment');
 
 function signin(req, res, next) {
+  console.log('finding user with id', req.body.userName);
   usersQuery.findUserById(req.body.userName).then(function(user) {
     console.log('user', user);
       if (!user) {

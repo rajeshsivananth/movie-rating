@@ -3,7 +3,7 @@ var Movie = require('./movies.model')
 function findMoviesByGenre(genre){
   return Movie.find({
     'Genre': genre
-  }).limit(5);
+  });
 }
 
 function findAllMovies(){

@@ -10,7 +10,7 @@ module.exports = function(app) {
     console.log('Going to call next() from main end-point to users end point.')
     next();
   }, require('./users/users.route.js'));
-  
+
     app.use('/api/' + version + '/movies', function(req, res, next) {
     console.log('Going to call next() from main end-point to movies end point.')
     next();

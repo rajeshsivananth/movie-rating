@@ -7,7 +7,7 @@ function getMovies(req, res, next) {
 }
 
 function saveMovies() {
-  http.get("https://api.cinemalytics.com/v1/movie/year/2016/?auth_token=DFA248672A75A701CAE483D44B47478F", function (err, response, body) {
+  http.get("https://api.cinemalytics.com/v1/movie/year/2015/?auth_token=DFA248672A75A701CAE483D44B47478F", function (err, response, body) {
     if(err) {
       console.error(err);
     } else if(response){

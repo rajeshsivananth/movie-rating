@@ -6,13 +6,13 @@
       <div class="forceColor"></div>
       <div class="topbar">
         <div class="spanColor"></div>
-        <input type="email" class="input" ng-model="user.email" id="email" placeholder="email-id" required/>
+        <input type="email" class="input" ng-model="user.userName" id="email" placeholder="email-id" required/>
         <input type="password" class="input" ng-model="user.password" id="password" placeholder="Password" required/>
-        <p ng-if="error" style="color: white;font-weight: bold">
+        <p ng-if="error" style="color: black;font-weight: bold">
           {{error}}
         </p>
       </div>
-      <button class="submit" type="submit" id="submit">Login</button>
+      <button class="submit" type="submit" style="background: grey; font-weight: 900" id="submit">Login</button>
     </div>
   </form>
 

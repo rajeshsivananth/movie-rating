@@ -32,6 +32,18 @@
         max-width: 730px;
     }
 }
+.mr-header{
+  height: 12%;
+  background-color: #FDFDFD;
+  border-bottom: solid 1px grey;
+  color: white;
+  background-color: #157ED2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+}
 .login-page{
   background: url(https://newevolutiondesigns.com/images/freebies/city-wallpaper-18.jpg) no-repeat fixed;
   width: 100%;

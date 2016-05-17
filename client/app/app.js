@@ -1,4 +1,19 @@
-var app = angular.module('MovieReview', ['ui.router']);
+var app = angular.module('MovieReview', ['ui.router','ui.bootstrap']);
+app.controller('MovieReviewController', ['$scope', '$state',function($scope, $state){
+  $scope.sign_out = function(){
+    window.localStorage.removeItem('mr_token');
+    $state.go('login');
+  };
+  $scope.isLoggedIn = function(){
+    // console.log('login status', window.localStorage.mr_token);
+    if(window.localStorage.mr_token && window.localStorage.mr_token !==undefined){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+}]);
 app.config(['$stateProvider','$urlRouterProvider', '$locationProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider){
     $urlRouterProvider.otherwise('/login');
     $stateProvider
@@ -13,8 +28,33 @@ app.config(['$stateProvider','$urlRouterProvider', '$locationProvider', '$httpPr
       controller: 'MovieController',
     })
 }]);
-app.services("Auth",['$http',function($http){
+app.run(['$rootScope', '$state',function($rootScope, $state){
+  $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams){
+    if(toState.name == 'movie'){
+      if(!window.localStorage.mr_token){
+        event.preventDefault();
+        $state.go('login');
+      }
+    }
+    else if(toState.name == 'login'){
+      if(window.localStorage.mr_token){
+        event.preventDefault();
+        $state.go('movie');
+      }
+    }
+
+
+  });
+}]);
+app.service("Auth",['$http',function($http){
   this.login = function(user){
-    return $http.post(,angular.toJson(user));
+    console.log('user', user);
+    return $http.post('api/v1/users/signin',angular.toJson(user));
+  };
+}]);
+app.service("Movie",['$http',function($http){
+  this.find_by_genre = function(genre){
+    console.log('genre', genre);
+    return $http.get('api/v1/movies/'+genre);
   };
 }])
